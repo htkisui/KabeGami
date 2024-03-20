@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KabeGami.Api", "KabeGami.Api\KabeGami.Api.csproj", "{43BF1A00-E881-4930-9BC7-FDEA98E2DF52}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KabeGami.Infrastructure", "KabeGami.Infrastructure\KabeGami.Infrastructure.csproj", "{82FB2F2C-43C0-4198-82CB-81DBDDAEEF18}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KabeGami.Domain", "KabeGami.Domain\KabeGami.Domain.csproj", "{0E465371-5054-49E7-8DCE-2FD832FB8417}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KabeGami.Application", "KabeGami.Application\KabeGami.Application.csproj", "{79CB60B8-2D9D-4180-AF40-2F7D4F8E2D3B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KabeGami.Desktop", "KabeGami.Desktop\KabeGami.Desktop.csproj", "{BA20A75B-3CC0-4C2F-B088-2BEBEE88543B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43BF1A00-E881-4930-9BC7-FDEA98E2DF52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43BF1A00-E881-4930-9BC7-FDEA98E2DF52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43BF1A00-E881-4930-9BC7-FDEA98E2DF52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43BF1A00-E881-4930-9BC7-FDEA98E2DF52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82FB2F2C-43C0-4198-82CB-81DBDDAEEF18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82FB2F2C-43C0-4198-82CB-81DBDDAEEF18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82FB2F2C-43C0-4198-82CB-81DBDDAEEF18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82FB2F2C-43C0-4198-82CB-81DBDDAEEF18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E465371-5054-49E7-8DCE-2FD832FB8417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E465371-5054-49E7-8DCE-2FD832FB8417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E465371-5054-49E7-8DCE-2FD832FB8417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E465371-5054-49E7-8DCE-2FD832FB8417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79CB60B8-2D9D-4180-AF40-2F7D4F8E2D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79CB60B8-2D9D-4180-AF40-2F7D4F8E2D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79CB60B8-2D9D-4180-AF40-2F7D4F8E2D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79CB60B8-2D9D-4180-AF40-2F7D4F8E2D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA20A75B-3CC0-4C2F-B088-2BEBEE88543B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA20A75B-3CC0-4C2F-B088-2BEBEE88543B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA20A75B-3CC0-4C2F-B088-2BEBEE88543B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA20A75B-3CC0-4C2F-B088-2BEBEE88543B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C6762EF-6DF9-4038-959B-04B610D2B573}
+	EndGlobalSection
+EndGlobal
