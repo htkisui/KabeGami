@@ -1,15 +1,20 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using KabeGami.Application;
+using KabeGami.Desktop.Views.Common.MainWindow;
+using KabeGami.Desktop.Views.MainMenu;
 using KabeGami.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
-
 namespace KabeGami.Desktop;
-
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
 public partial class App : System.Windows.Application
 {
+    public static IContainer Container { get; private set; } = null!;
+
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
@@ -25,14 +30,20 @@ public partial class App : System.Windows.Application
         var builder = new ContainerBuilder();
         {
             builder.Populate(services);
-            builder.RegisterType<MainWindow>().AsSelf();
         }
 
-        var container = builder.Build();
+        Container = builder.Build();
         {
-            var mainWindow = container.Resolve<MainWindow>();
-            mainWindow.Show();
+            Container.Resolve<MainWindow>();
+            Container.Resolve<MainMenuUserControl>();
         }
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        base.OnExit(e);
+        var mainMenuUserControl = Container.Resolve<MainMenuUserControl>();
+        mainMenuUserControl.Dispose();
     }
 }
 
