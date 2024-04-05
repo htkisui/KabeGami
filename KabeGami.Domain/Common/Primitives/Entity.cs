@@ -1,9 +1,14 @@
 ﻿namespace KabeGami.Domain.Common.Primitives;
-public class Entity<TId> 
-    : IEquatable<Entity<TId>>
+public abstract class Entity<TId> 
+    : IEquatable<Entity<TId>>,
+    IHasDomainEvents
         where TId : notnull
 {
-    public TId Id { get; }
+    public TId Id { get; private set; }
+
+    private readonly List<DomainEvent> _domainEvents = [];
+    public IReadOnlyList<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
 
     protected Entity(TId id)
     {
@@ -14,6 +19,9 @@ public class Entity<TId>
     protected Entity() { }
 #pragma warning restore CS8618
 
+    public void AddDomainEvent(DomainEvent domainEvent) => _domainEvents.Add(domainEvent);
+    public void ClearDomainEvents() => _domainEvents.Clear();
+
     public override bool Equals(object? obj) => obj is Entity<TId> entity && Id.Equals(entity.Id);
 
     public bool Equals(Entity<TId>? other) => Equals((object?)other);
@@ -23,4 +31,5 @@ public class Entity<TId>
     public static bool operator !=(Entity<TId> left, Entity<TId> right) => !Equals(left, right);
 
     public override int GetHashCode() => Id.GetHashCode();
+
 }

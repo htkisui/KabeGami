@@ -1,5 +1,5 @@
-﻿using Autofac;
-using KabeGami.Desktop.ViewModels.MainMenu;
+﻿using KabeGami.Desktop.ViewModels.MainMenu;
+using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 using System.Drawing;
 using System.IO;
@@ -17,8 +17,8 @@ public partial class MainMenuUserControl : UserControl
     public MainMenuUserControl()
     {
         InitializeComponent();
-        _notifyIcon = App.Container.Resolve<Forms.NotifyIcon>();
-        _viewModel = App.Container.Resolve<MainMenuViewModel>();
+        _notifyIcon = App.Container.GetRequiredService<Forms.NotifyIcon>();
+        _viewModel = App.Container.GetRequiredService<MainMenuViewModel>();
         DataContext = _viewModel;
         InitializeNotifyIcon();
     }
@@ -27,7 +27,7 @@ public partial class MainMenuUserControl : UserControl
     {
         try
         {
-            _notifyIcon.Icon = new Icon(ConfigurationManager.AppSettings["MainMenuIconPath"]!);
+            _notifyIcon.Icon = new Icon(App.Configuration["MainMenuIconPath"]!);
             _notifyIcon.Visible = true;
         }
         catch (Exception ex)

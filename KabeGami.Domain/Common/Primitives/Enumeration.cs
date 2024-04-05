@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
 
 namespace KabeGami.Domain.Common.Primitives;
-public abstract class Enumeration<TEnum> 
+public abstract class Enumeration<TEnum>
     : IEquatable<Enumeration<TEnum>>
         where TEnum : Enumeration<TEnum>
 {
     private static readonly Dictionary<int, TEnum> _enumerations = CreateEnumerations();
 
-    public string Name { get; }
-    public int Value { get; }
+    public string Name { get; private set; }
+    public int Value { get; private set; }
 
     protected Enumeration(string name, int value)
     {
@@ -16,11 +16,15 @@ public abstract class Enumeration<TEnum>
         Value = value;
     }
 
+#pragma warning disable CS8618
+    protected Enumeration() { }
+#pragma warning restore CS8618
+
     public static TEnum? FromValue(int value)
     {
         return _enumerations.TryGetValue(
             value,
-            out TEnum? enumeration) 
+            out TEnum? enumeration)
                 ? enumeration : default;
     }
 
@@ -28,7 +32,7 @@ public abstract class Enumeration<TEnum>
     {
         return _enumerations
             .Values
-            .SingleOrDefault(e => e.Name == name);
+            .SingleOrDefault(e => e.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
     }
 
     public static List<string> GetNames()

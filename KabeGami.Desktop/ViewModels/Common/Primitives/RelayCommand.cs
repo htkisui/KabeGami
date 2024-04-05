@@ -2,7 +2,7 @@
 
 namespace KabeGami.Desktop.ViewModels.Common.Primitives;
 
-public class RelayCommand : ICommand
+internal class RelayCommand : ICommand
 {
     private readonly Action<object?> _execute;
     private readonly Predicate<object?>? _canExecute;
@@ -11,7 +11,7 @@ public class RelayCommand : ICommand
 
     public RelayCommand(Action<object?> execute, Predicate<object?>? canExecute)
     {
-        if (execute == null) throw new ArgumentNullException("execute");
+        ArgumentNullException.ThrowIfNull(execute);
         _execute = execute;
         _canExecute = canExecute;
     }
@@ -22,7 +22,7 @@ public class RelayCommand : ICommand
         remove { CommandManager.RequerySuggested -= value; }
     }
 
-    public bool CanExecute(object? parameter) => _canExecute == null ? true : _canExecute(parameter);
+    public bool CanExecute(object? parameter) => _canExecute == null || _canExecute(parameter);
 
     public void Execute(object? parameter) => _execute(parameter);
 }

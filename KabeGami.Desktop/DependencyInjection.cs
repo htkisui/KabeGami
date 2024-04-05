@@ -1,6 +1,8 @@
 ﻿using KabeGami.Desktop.ViewModels.MainMenu;
+using KabeGami.Desktop.ViewModels.Test;
 using KabeGami.Desktop.Views.Common.MainWindow;
 using KabeGami.Desktop.Views.MainMenu;
+using KabeGami.Desktop.Views.Test;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Forms;
 
@@ -21,12 +23,14 @@ public static class DependencyInjection
     public static IServiceCollection AddUserControls(this IServiceCollection services)
     {
         services.AddSingleton<MainMenuUserControl>();
+        services.AddSingleton<TestUserControl>();
         return services;
     }
 
     public static IServiceCollection AddViewModels(this IServiceCollection services)
     {
         services.AddSingleton<MainMenuViewModel>();
+        services.AddSingleton<TestViewModel>();
         return services;
     }
 
