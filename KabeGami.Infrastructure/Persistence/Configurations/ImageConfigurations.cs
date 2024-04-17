@@ -11,24 +11,24 @@ internal sealed class ImageConfigurations
     public void Configure(EntityTypeBuilder<Image> builder)
     {
         ConfigureImagesTable(builder);
-        ConfigureImageAlterIdsTable(builder);
+        //ConfigureImageAlterIdsTable(builder);
     }
 
-    private static void ConfigureImageAlterIdsTable(EntityTypeBuilder<Image> builder)
-    {
-        builder.OwnsMany(i => i.ImageAlterIds, iab =>
-        {
-            iab.ToTable("ImageAlterIds");
-            iab.WithOwner().HasForeignKey("ImageId");
-            iab.HasKey("Id");
-            iab.Property(i => i.Value)
-                .HasColumnName("ImageId")
-                .ValueGeneratedNever();
-        });
+    //private static void ConfigureImageAlterIdsTable(EntityTypeBuilder<Image> builder)
+    //{
+    //    builder.OwnsMany(i => i.ImageAlterIds, iab =>
+    //    {
+    //        iab.ToTable("ImageAlterIds");
+    //        iab.WithOwner().HasForeignKey("ImageId");
+    //        iab.HasKey("Id");
+    //        iab.Property(i => i.Value)
+    //            .HasColumnName("ImageId")
+    //            .ValueGeneratedNever();
+    //    });
 
-        builder.Metadata.FindNavigation(nameof(Image.ImageAlterIds))!
-            .SetPropertyAccessMode(PropertyAccessMode.Field);
-    }
+    //    builder.Metadata.FindNavigation(nameof(Image.ImageAlterIds))!
+    //        .SetPropertyAccessMode(PropertyAccessMode.Field);
+    //}
 
     private static void ConfigureImagesTable(EntityTypeBuilder<Image> builder)
     {

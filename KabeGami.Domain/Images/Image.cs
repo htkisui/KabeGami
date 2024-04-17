@@ -2,18 +2,18 @@
 using KabeGami.Domain.Common.Errors;
 using KabeGami.Domain.Common.Primitives;
 using KabeGami.Domain.Images.Enumerations;
-using KabeGami.Domain.Images.Events;
+using KabeGami.Domain.Images.DomainEvents;
 using KabeGami.Domain.Images.ValueObjects;
 
 namespace KabeGami.Domain.Images;
 public sealed class Image : AggregateRoot<ImageId>
 {
-    private readonly List<ImageId> _imageAlterIds = [];
 
     public ImageExtension ImageExtension { get; private set; }
     public ImageCategory ImageCategory { get; private set; }
     public bool IsSFW { get; private set; }
-    public IReadOnlyList<ImageId> ImageAlterIds => _imageAlterIds.AsReadOnly();
+    //public IReadOnlyList<ImageId> ImageAlterIds => _imageAlterIds.AsReadOnly();
+    //private readonly List<ImageId> _imageAlterIds = [];
     public DateTime CreatedDateTime { get; private set; }
     public DateTime UpdatedDateTime { get; private set; }
 
@@ -42,16 +42,20 @@ public sealed class Image : AggregateRoot<ImageId>
         string imageCategoryString,
         bool isSFW)
     {
+        if (imageExtensionString.StartsWith('.'))
+        {
+            imageExtensionString = imageExtensionString[1..];
+        }
         var imageExtension = ImageExtension.FromName(imageExtensionString);
         if (imageExtension is null)
         {
-            return Errors.Image.FileExtension.InvalidFileExtension;
+            return Errors.Image.ImageExtension.InvalidImageExtension(imageExtensionString);
         }
 
         var imageCategory = ImageCategory.FromName(imageCategoryString);
         if (imageCategory is null)
         {
-            return Errors.Image.ImageCategory.InvalidImageCategory;
+            return Errors.Image.ImageCategory.InvalidImageCategory(imageCategoryString);
         }
 
         var imageId = ImageId.CreateUnique();

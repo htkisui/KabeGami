@@ -1,7 +1,7 @@
 ﻿using ErrorOr;
 using KabeGami.Application.Common.Interfaces.Persistence;
 using KabeGami.Application.Common.Interfaces.Services;
-using KabeGami.Application.Images.Common;
+using KabeGami.Application.Images.Common.Results;
 using KabeGami.Domain.Images;
 using MapsterMapper;
 using MediatR;
@@ -12,7 +12,7 @@ internal sealed class CreateImageCommandHandler(
     IMapper mapper,
     IOperatingSystemService operatingSystemService,
     IUnitOfWork unitOfWork)
-    : IRequestHandler<CreateImageCommand, ErrorOr<Unit>>
+        : IRequestHandler<CreateImageCommand, ErrorOr<Unit>>
 {
     private readonly IImageRepository _imageRepository = imageRepository;
     private readonly IMapper _mapper = mapper;
@@ -22,22 +22,25 @@ internal sealed class CreateImageCommandHandler(
     public async Task<ErrorOr<Unit>> Handle(CreateImageCommand request, CancellationToken cancellationToken)
     {
         var image = Image.Create(
-            request.ImageExtension,
+            Path.GetExtension(request.ImageSourcePath),
             request.ImageCategory,
             request.IsSFW);
         if (image.IsError)
         {
             return image.Errors;
         }
-        await _imageRepository.AddAsync(image.Value);
+
+        await _imageRepository.AddImageAsync(image.Value, cancellationToken);
 
         var imageResult = _mapper.Map<ImageResult>(image.Value);
-        var saveImage = await _operatingSystemService.MoveImage(
+
+        var imageSystemSaved = await _operatingSystemService.MoveImage(
             imageResult,
-            request.ImageSourcePath);
-        if (saveImage.IsError)
+            request.ImageSourcePath,
+            cancellationToken);
+        if (imageSystemSaved.IsError)
         {
-            return saveImage.Errors;
+            return imageSystemSaved.Errors;
         }
 
         await _unitOfWork.SaveChangeAsync(cancellationToken);

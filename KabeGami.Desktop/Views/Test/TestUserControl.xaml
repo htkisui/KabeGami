@@ -9,9 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <TextBlock
-            Text="{Binding Message}">
-
+            Text="{Binding Count}">
         </TextBlock>
-        <Button Command="{Binding Test}">Click</Button>
     </StackPanel>
 </UserControl>

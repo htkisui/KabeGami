@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KabeGami.Desktop.Views.Common.MainWindow"
+        xmlns:topnav="clr-namespace:KabeGami.Desktop.Views.Common.TopNav"
         xmlns:test="clr-namespace:KabeGami.Desktop.Views.Test"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <test:TestUserControl/>
-    </Grid>
+    <DockPanel>
+        <topnav:TopNavUserControl DockPanel.Dock="Top"/>
+        <StackPanel x:Name="Main" DockPanel.Dock="Bottom">
+            <test:TestUserControl/>
+        </StackPanel>
+    </DockPanel>
 </Window>

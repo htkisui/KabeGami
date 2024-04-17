@@ -1,6 +1,5 @@
 ﻿using KabeGami.Application;
-using KabeGami.Desktop.Views.Common.MainWindow;
-using KabeGami.Desktop.Views.MainMenu;
+using KabeGami.Desktop.Views.KabeGamiCores;
 using KabeGami.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +14,13 @@ public partial class App : System.Windows.Application
 {
     public static IServiceProvider Container { get; private set; } = null!;
     public static IConfiguration Configuration { get; private set; } = null!;
+    private Mutex mutex = null!;
+
+
+    private const string appSettings = "appsettings.json";
+    private const string mutexName = "MutexName";
+    private const string mutexErrorMessage = "KabeGami is already running.";
+    private const string mutexErrorTitle = "Error";
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -22,22 +28,28 @@ public partial class App : System.Windows.Application
 
         var configurationBuilder = new ConfigurationBuilder()
            .SetBasePath(Directory.GetCurrentDirectory())
-           .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+           .AddJsonFile(appSettings, optional: false, reloadOnChange: true);
         Configuration = configurationBuilder.Build();
+
+        mutex = new Mutex(true, Configuration[mutexName], out bool createdNew);
+        if (createdNew is false)
+        {
+            MessageBox.Show(mutexErrorMessage, mutexErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            Shutdown();
+            return;
+        }
 
         var services = new ServiceCollection();
         {
             services
-                .AddPresentation()
+                .AddPresentation(Configuration)
                 .AddApplication()
                 .AddInfrastructure(Configuration);
         }
 
         Container = services.BuildServiceProvider();
         {
-            var mainWindow = Container.GetRequiredService<MainWindow>();
-            mainWindow.Show();
-            Container.GetRequiredService<MainMenuUserControl>();
+            Container.GetRequiredService<KabeGamiCoreUserControl>();
         }
     }
 
@@ -46,6 +58,7 @@ public partial class App : System.Windows.Application
         base.OnExit(e);
         var mainMenuUserControl = Container.GetRequiredService<MainMenuUserControl>();
         mainMenuUserControl.Dispose();
+        mutex.Dispose();
     }
 }
 

@@ -3,7 +3,7 @@
 namespace KabeGami.Infrastructure.Persistence;
 internal sealed class UnitOfWork(
     ApplicationDbContext context)
-    : IUnitOfWork
+        : IUnitOfWork
 {
     private readonly ApplicationDbContext _context = context;
     public async Task SaveChangeAsync(CancellationToken cancellationToken) 

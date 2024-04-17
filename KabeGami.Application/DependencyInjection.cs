@@ -1,5 +1,4 @@
 ﻿using KabeGami.Application.Common.Mappings;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KabeGami.Application;

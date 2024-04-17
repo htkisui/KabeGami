@@ -4,33 +4,29 @@ using MediatR;
 using System.Windows.Input;
 
 namespace KabeGami.Desktop.ViewModels.Test;
-internal class TestViewModel(ISender sender) : ViewModelBase
+internal class TestViewModel(
+    ISender sender) 
+        : ViewModelBase
 {
-    private string message = string.Empty;
-    public string Message
+    private int count;
+    public int Count
     {
-        get { return message; }
+        get { return count; }
         set
         {
-            message = value;
-            OnPropertyChanged("Message");
+            count = value;
+            OnPropertyChanged("Count");
         }
     }
 
     private readonly ISender _sender = sender;
 
-    public ICommand Test => new RelayCommand(async execute =>
+    public ICommand ClickTest => new RelayCommand(async execute =>
     {
-        var command = new CreateImageCommand(@"D:\Desktop\a.png", "PNG", "CgOriginal", true);
-        var res = await _sender.Send(command);
-        if (res.IsError)
-        {
-            Message = res.FirstError.ToString();
-        }
-        else
-        {
-            Message = "No Problem";
-        }
+        Count++;
+        await Task.CompletedTask;
 
     });
+
+
 }

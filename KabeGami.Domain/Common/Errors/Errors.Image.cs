@@ -5,22 +5,19 @@ public static partial class Errors
 {
     public static class Image
     {
-        public static Error DuplicateImage => Error.Conflict(
-            code: "Image.DuplicateImage",
-            description: "Image is already in use.");
-
-        public static class FileExtension
-        {
-            public static Error InvalidFileExtension => Error.Validation(
-                code: "Image.FileExtension.InvalidFileExtension",
-                description: "Invalid file extension name.");
-        }
-
         public static class ImageCategory
         {
-            public static Error InvalidImageCategory => Error.Validation(
+            public static Error InvalidImageCategory(string imageCategoryString) => Error.Validation(
                 code: "Image.ImageCategory.InvalidImageCategory",
-                description: "Invalid image category name.");
+                description: $"{imageCategoryString} is not a valid category name.");
         }
+
+        public static class ImageExtension
+        {
+            public static Error InvalidImageExtension(string imageExtensionString) => Error.Validation(
+                code: "Image.ImageExtension.InvalidImageExtension",
+                description: $"{imageExtensionString} is not a valid extension name.");
+        }
+
     }
 }

@@ -10,4 +10,16 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    protected override void OnInitialized(EventArgs e)
+    {
+        base.OnInitialized(e);
+        Closing += OnClosing;
+    }
+
+    private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
+    {
+        e.Cancel = true;
+        this.Hide();
+    }
 }
