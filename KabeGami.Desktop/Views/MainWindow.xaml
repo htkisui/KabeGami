@@ -1,0 +1,19 @@
+﻿<Window x:Class="KabeGami.Desktop.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KabeGami.Desktop.Views"
+        xmlns:layouts="clr-namespace:KabeGami.Desktop.Views.Common.Layouts"
+        mc:Ignorable="d"
+        Title="KabeGami"
+        Height="900" Width="1600"
+        ResizeMode="CanMinimize">
+    <DockPanel>
+        <layouts:TopNavUserControl DockPanel.Dock="Top"
+                                   x:Name="TopNav"
+                                   MenuItemSelectedEvent="TopNav_MenuItemSelectedEvent"/>
+        <ContentControl DockPanel.Dock="Bottom"
+                        x:Name="MainContentControl"/>
+    </DockPanel>
+</Window>
