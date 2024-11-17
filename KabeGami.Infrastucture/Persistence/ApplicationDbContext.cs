@@ -32,12 +32,8 @@ internal sealed class ApplicationDbContext
 
         // Create Unique Home Entity
         var home = Home.Create();
-        if (home.IsError)
-        {
-            throw new InvalidOperationException("Home was not configured correctly.");
-        }
         modelBuilder.Entity<Home>()
-            .HasData(home.Value);
+            .HasData(home);
 
         base.OnModelCreating(modelBuilder);
     }

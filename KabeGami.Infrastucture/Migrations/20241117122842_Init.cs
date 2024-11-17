@@ -106,7 +106,7 @@ namespace KabeGami.Infrastucture.Migrations
             migrationBuilder.InsertData(
                 table: "Home",
                 columns: new[] { "Id", "CreatedDateTime", "UpdatedDateTime" },
-                values: new object[] { new Guid("79e86fa5-b774-42d7-85da-db738f0db52e"), new DateTime(2024, 10, 18, 10, 53, 57, 653, DateTimeKind.Local).AddTicks(5566), new DateTime(2024, 10, 18, 10, 53, 57, 653, DateTimeKind.Local).AddTicks(5608) });
+                values: new object[] { new Guid("b32cba49-a006-457a-adaa-c47ef7ae21ed"), new DateTime(2024, 11, 17, 13, 28, 42, 86, DateTimeKind.Local).AddTicks(6297), new DateTime(2024, 11, 17, 13, 28, 42, 86, DateTimeKind.Local).AddTicks(6344) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Kabes_HomeId",

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KabeGami.Infrastucture.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241018085357_Init")]
+    [Migration("20241117122842_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace KabeGami.Infrastucture.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -64,9 +64,9 @@ namespace KabeGami.Infrastucture.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("79e86fa5-b774-42d7-85da-db738f0db52e"),
-                            CreatedDateTime = new DateTime(2024, 10, 18, 10, 53, 57, 653, DateTimeKind.Local).AddTicks(5566),
-                            UpdatedDateTime = new DateTime(2024, 10, 18, 10, 53, 57, 653, DateTimeKind.Local).AddTicks(5608)
+                            Id = new Guid("b32cba49-a006-457a-adaa-c47ef7ae21ed"),
+                            CreatedDateTime = new DateTime(2024, 11, 17, 13, 28, 42, 86, DateTimeKind.Local).AddTicks(6297),
+                            UpdatedDateTime = new DateTime(2024, 11, 17, 13, 28, 42, 86, DateTimeKind.Local).AddTicks(6344)
                         });
                 });
 

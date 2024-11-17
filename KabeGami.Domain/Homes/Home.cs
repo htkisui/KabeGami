@@ -9,7 +9,7 @@ using MediatR;
 namespace KabeGami.Domain.Homes;
 public sealed class Home : AggregateRoot<HomeId>
 {
-    public Kabe? DefaultKabe { get; private set; } = null!;
+    public Kabe? DefaultKabe { get; private set; }
     public IReadOnlyList<Kabe> Kabes => _kabes.AsReadOnly();
     private readonly List<Kabe> _kabes = [];
     public DateTime CreatedDateTime { get; private set; }
@@ -27,7 +27,7 @@ public sealed class Home : AggregateRoot<HomeId>
 
     private Home() { }
 
-    public static ErrorOr<Home> Create()
+    public static Home Create()
     {
         return new Home(
             HomeId.CreateUnique(),
